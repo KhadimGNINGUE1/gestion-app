@@ -1,0 +1,30 @@
+{% extends 'partials/_nav.html' %}
+
+{% block content %}
+
+    <div class="tab">
+        <div class="row">
+            <div class="col md-12">
+                <h2>Liste Promotions</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Nom promo</th>
+                        <th>Date debut</th>
+                        <th>Date fin</th>
+                        <th>Action</th>
+                    </tr>
+                    {%for lister in l%}
+                    <tr>
+                        <td>{{lister.1}}</td>
+                        <td>{{lister.2}}</td>
+                        <td>{{lister.3}}</td>
+                        <td>
+                            <a href="/liste&{{lister.0}}" class="btn btn-warning btn-xs">Lister</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

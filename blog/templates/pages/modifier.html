@@ -1,0 +1,157 @@
+{% extends 'partials/_nav.html' %}
+
+{% block content %}
+
+    <div class="tab">
+        <div class="row">
+            <div class="col md-12">
+                <h2>Liste Apprenants </h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>E-mail</th>
+                        <th>Date Naissance</th>
+                        <th>Matricule</th>
+                        <th>Sexe</th>
+                        <th>Statut</th>
+                        <th>Promo</th>
+                        <th>Action</th>
+                    </tr>
+                    {%for lister in l%}
+                    <tr>
+                        <td>{{lister.0}}</td>
+                        <td>{{lister.1}}</td>
+                        <td>{{lister.2}}</td>
+                        <td>{{lister.3}}</td>
+                        <td>{{lister.4}}</td>
+                        <td>{{lister.5}}</td>
+                        <td>{{lister.6}}</td>
+                        <td>{{lister.7}}</td>
+                        <td>{{lister.8}}</td>
+                        <td>
+                            <a href="/modification/{{lister.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{lister.0}}">Modifier</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+
+                </table>
+            </div>
+        </div>
+ </div>
+ {%for lister in l%}
+ <div id="modaledit{{lister.0}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+       <div class="modal-content">
+           <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">Modification</h4>
+           </div>
+           <div class="modal-body">
+               <form action="{{url_for('modification')}}" method="POST">
+
+                    {%with messages= get_flashed_messages()%}
+                    {%if messages%}
+                    {%for message in messages%}
+                    <div class="alert alert-success alert-dismissable" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                            {{message}}
+                    </div>
+                    {%endfor%}
+                    {%endif%}
+                    {%endwith%}
+
+                     <div class="form-group">
+                           <label>Nom:</label>
+                           <input type="hidden"  name="id_ap" value="{{lister.0}}">
+                           <input type="text" class="form-control" name="nom_ap" value="{{lister.1}}">
+         
+         
+                     </div>
+
+                        <div class="form-group">
+         
+         
+                           <label>Prénom:</label>
+         
+                           <input type="text" class="form-control" name="prenom_ap" value="{{lister.2}}">
+                        </div>
+                        <div class="form-group">
+         
+         
+                              <label>E-mail:</label>
+            
+                              <input type="text" class="form-control" name="email" value="{{lister.3}}">
+                        </div>
+                        <div class="form-group">
+         
+         
+                              <label>Date Naissance:</label>
+            
+                              <input type="date" class="form-control" name="date" value="{{lister.4}}">
+                        </div>
+                         <!-- <div class="form-group">
+         
+         
+                              <label>Matricule:</label>
+            
+                              <input type="text" class="form-control" name="matricule" value="{{lister.5}}">
+                        </div> -->
+                        <div class="form-group">
+                         
+                         
+                              <label for="sexe">Sexe :</label>
+                              <select name="sexe" id="sexe" value="{{lister.6}}">
+                                  <option value="H">H</option>
+                                  <option value="F">F</option>
+                              </select> <br> <br>
+            
+            
+                        </div>
+                        <div class="form-group">
+         
+         
+                            <label>Statut:</label>
+          
+                            <input type="text" class="form-control" name="statut" value="{{lister.7}}">
+                      </div>
+
+                        <div class="form-group">
+                            <label for="promo">Promo :</label>
+                            <select name="promo" id="promo">
+                            {% for lister1 in l1 %}
+                                <option value="{{ lister1[0] }}">{{ lister1[1] }}</option>
+                            {% endfor %}
+                            </select> <br> <br>
+                        </div>
+                      <div class="form-group">
+                         
+                         
+                           <button class="btn btn-primary" type="sbumit">Modifier</button>
+         
+         
+                        </div>
+         
+         
+                     </form>
+         
+         
+                  </div>
+         
+         
+                  <div class="modal-footer">
+         
+         
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+         
+         
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+ {%endfor%}
+{% endblock content %}

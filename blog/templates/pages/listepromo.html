@@ -1,0 +1,37 @@
+{% extends 'partials/_nav.html' %}
+
+{% block content %}
+
+    <div class="tab">
+        <div class="row">
+            <div class="col md-12">
+                <h2 class="text-center">Liste des Apprenants par promotion </h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>E-mail</th>
+                        <th>Date Naissance</th>
+                        <th>Matricule</th>
+                        <th>Sexe</th>
+                        <th>Statut</th>
+                    </tr>
+                    {%for lister in l%}
+                    <tr>
+                        <td>{{lister.0}}</td>
+                        <td>{{lister.1}}</td>
+                        <td>{{lister.2}}</td>
+                        <td>{{lister.3}}</td>
+                        <td>{{lister.4}}</td>
+                        <td>{{lister.5}}</td>
+                        <td>{{lister.6}}</td>
+                        <td>{{lister.7}}</td>
+                    </tr>
+                    {%endfor%}
+
+                </table>
+            </div>
+        </div>
+ </div>
+ {% endblock content %}
